@@ -1,0 +1,2 @@
+export const CHANGE_FIELD_VALUE = "CHANGE_FIELD_VALUE"
+export const SET_PRODUCTS = "SET_PRODUCTS"
