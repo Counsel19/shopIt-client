@@ -2,14 +2,15 @@ import "./Navbar.css";
 import { BsSearch, BsHeart, BsCart } from "react-icons/bs";
 import { useAppContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
+import { BiUser } from "react-icons/bi";
 
 const Navbar = () => {
-  const { search, handleInputChange } = useAppContext();
+  const { search, handleInputChange, user } = useAppContext();
   return (
     <div className="wrapper">
       <div className="brand">
         <Link to="/">
-        Test<span>Commerce</span>
+          Test<span>Commerce</span>
         </Link>
       </div>
 
@@ -20,31 +21,37 @@ const Navbar = () => {
           name="search"
           value={search}
           onChange={(e) => handleInputChange("search", e.target.value)}
-          placeholder="Search Products" 
+          placeholder="Search Products"
           className="search-input"
         />
       </div>
 
       <div className="navLinks">
         <Link to="/saved">
-        <div className="navItem">
-          <BsHeart  size={20} />
-          Saved
-        </div>
+          <div className="navItem">
+            <BsHeart size={20} />
+            Saved
+          </div>
         </Link>
         <Link to="/cart">
-        <div className="navItem">
-          <div className="cart">
-            <BsCart  size={22}/>
-            <span>5</span>
+          <div className="navItem">
+            <div className="cart">
+              <BsCart size={22} />
+              <span>5</span>
+            </div>
+            Cart
           </div>
-          Cart
-        </div>
         </Link>
 
-        <Link to="/login" className="btn">
-          Login
-        </Link>
+        {user ? (
+          <div className="text-sm flex items-center justify-center gap-2 text-blue-700 ">
+            <BiUser size={19} /> {`${user?.fullname.slice(0, 5)}...`}
+          </div>
+        ) : (
+          <Link to="/login" className="btn">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -5,81 +5,39 @@ import Product from "./Product";
 import { useAppContext } from "../../context/AppContext";
 import { TailSpin } from "react-loader-spinner";
 
-// const products = [
-//   {
-//     _id: "1",
-//     name: "Men's Office Corporate Black Shirts-black",
-//     image:
-//       "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/01/174543/1.jpg?8506",
-//     price: "4000",
-//     actualPrice: "5000",
-//   },
-
-//   {
-//     _id: "2",
-//     name: "Men's Office Corporate Black Shirts-black",
-//     image:
-//       "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/01/174543/1.jpg?8506",
-//     price: "4000",
-//     actualPrice: "5000",
-//   },
-//   {
-//     _id: "3",
-//     name: "Men's Office Corporate Black Shirts-black",
-//     image:
-//       "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/01/174543/1.jpg?8506",
-//     price: "4000",
-//     actualPrice: "5000",
-//   },
-//   {
-//     _id: "5",
-//     name: "Men's Office Corporate Black Shirts-black",
-//     image:
-//       "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/01/174543/1.jpg?8506",
-//     price: "4000",
-//     actualPrice: "5000",
-//   },
-
-//   {
-//     _id: "7",
-//     name: "Men's Office Corporate Black Shirts-black",
-//     image:
-//       "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/01/174543/1.jpg?8506",
-//     price: "4000",
-//     actualPrice: "5000",
-//   },
-// ];
 const sortOptions = [
   {
     name: "Latest",
     value: "latest",
   },
   {
-    name: "High to Low",
-    value: "highToLow",
+    name: "A to Z",
+    value: "a-z",
   },
   {
-    name: "Low to High",
-    value: "lowToHigh",
+    name: "Z to A",
+    value: "z-a",
   },
 ];
 
 const ProductsCatalogue = () => {
   const [selectedOption, setSelectedOption] = useState(sortOptions[0]);
   const [showDropDown, setShowDropDown] = useState(false);
-  const { products } = useAppContext();
-
-  console.log(products, "products")
+  const { products, handleInputChange, categoryFilter } = useAppContext();
 
   const handleSelect = (option) => {
     setShowDropDown(false);
     setSelectedOption(option);
+    handleInputChange("sort", option )
   };
+
   return (
     <div className="w-full mr-20 my-16">
       <div className="w-full flex justify-between">
         <h2 className="text-blue-900 font-semibold text-xl mb-4">
-          All Products
+          {categoryFilter && categoryFilter !== "all"
+            ? categoryFilter
+            : "All Products"}
         </h2>
         <div className="sortDropdown">
           <span onClick={() => setShowDropDown(!showDropDown)}>
