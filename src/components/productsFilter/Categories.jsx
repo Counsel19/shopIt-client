@@ -2,28 +2,6 @@ import React from "react";
 import { TailSpin } from "react-loader-spinner";
 import { useAppContext } from "../../context/AppContext";
 
-const categories = [
-  {
-    name: "Wears",
-    value: "wears",
-  },
-  {
-    name: "Electronics",
-    value: "electronics",
-  },
-  {
-    name: "Phones",
-    value: "phones",
-  },
-  {
-    name: "cosmetics",
-    value: "cosmetics",
-  },
-  {
-    name: "Kitchen",
-    value: "kitchen",
-  },
-];
 
 const Categories = () => {
   const { allCategories, handleInputChange } = useAppContext();
@@ -40,15 +18,21 @@ const Categories = () => {
           All
         </span>
         {allCategories ? (
-          allCategories.categories.map((category) => (
-            <span
-              className="cursor-pointer rounded transition-all duration-75 hover:bg-blue-200 px-2 py-1 "
-              key={category._id}
-              onClick={() => handleInputChange("categoryFilter", category.name)}
-            >
-              {category.name}
-            </span>
-          ))
+          allCategories.categories.length > 0 ? (
+            allCategories.categories.map((category) => (
+              <span
+                className="cursor-pointer rounded transition-all duration-75 hover:bg-blue-200 px-2 py-1 "
+                key={category._id}
+                onClick={() =>
+                  handleInputChange("categoryFilter", category.name)
+                }
+              >
+                {category.name}
+              </span>
+            ))
+          ) : (
+            <p>No Category to display</p>
+          )
         ) : (
           <div className="flex items-center justify-center w-full">
             <TailSpin height="40" width="40" />

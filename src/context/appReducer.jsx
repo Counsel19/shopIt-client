@@ -17,6 +17,11 @@ const appReducer = (state, action) => {
         ...state,
         allCategories: action.payload.allCategories,
       };
+    case ACTIONS.USER_CART:
+      return {
+        ...state,
+        userCart: action.payload.userCart,
+      };
     case ACTIONS.SET_USER:
       return {
         ...state,
@@ -27,6 +32,16 @@ const appReducer = (state, action) => {
       return {
         ...state,
         isLoading: action.payload.isLoading,
+      };
+    case ACTIONS.SET_ERROR:
+      return {
+        ...state,
+        errorMsg: action.payload.errorMsg,
+      };
+    case ACTIONS.CLEAR_MESSAGE:
+      return {
+        ...state,
+        errorMsg: "",
       };
     default:
       return state;

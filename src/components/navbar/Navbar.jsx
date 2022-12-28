@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 
 const Navbar = () => {
-  const { search, handleInputChange, user } = useAppContext();
+  const { search, handleInputChange, user, userCart } = useAppContext();
   return (
     <div className="wrapper">
       <div className="brand">
@@ -37,7 +37,7 @@ const Navbar = () => {
           <div className="navItem">
             <div className="cart">
               <BsCart size={22} />
-              <span>5</span>
+              <span>{userCart?.numOfCart}</span>
             </div>
             Cart
           </div>

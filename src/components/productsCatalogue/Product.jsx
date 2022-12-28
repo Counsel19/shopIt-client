@@ -1,19 +1,38 @@
 import React from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../../context/AppContext";
 
 const Product = ({ product }) => {
+  const navigate = useNavigate();
+  const { addToCart } = useAppContext();
+
+  const handleAddToCart = async () => {
+    await addToCart({ productId: product._id });
+    navigate("/cart");
+  };
+
   return (
     product && (
       <div className="w-1/4 border border-gray-200 rounded-lg">
         <img src={product.image} alt={product.name} className="object-cover" />
         <div className="p-4">
-          <h4 className="text-blue-900 font-semibold text-base mb-2">{product.name}</h4>
+          <h4 className="text-blue-900 font-semibold text-base mb-2">
+            {product.name}
+          </h4>
           <div className="flex justify-between items-center">
             <div>
-              <span className="line-through text-sm text-gray-500">{product.actualPrice}</span>
-              <h4 className="font-semibold text-base mb-2">${product.sellingPrice}</h4>
+              <span className="line-through text-sm text-gray-500">
+                {product.actualPrice}
+              </span>
+              <h4 className="font-semibold text-base mb-2">
+                ${product.sellingPrice}
+              </h4>
             </div>
-            <button className="py-2 px-3 bg-blue-900 text-white h-fit rounded">
+            <button
+              className="py-2 px-3 bg-blue-900 text-white h-fit rounded"
+              onClick={handleAddToCart}
+            >
               <MdOutlineShoppingCart />
             </button>
           </div>
