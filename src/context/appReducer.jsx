@@ -22,6 +22,11 @@ const appReducer = (state, action) => {
         ...state,
         userCart: action.payload.userCart,
       };
+    case ACTIONS.USER_SAVED:
+      return {
+        ...state,
+        userSaved: action.payload.userSaved,
+      };
     case ACTIONS.SET_USER:
       return {
         ...state,

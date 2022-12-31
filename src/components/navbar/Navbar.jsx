@@ -37,7 +37,7 @@ const Navbar = () => {
           <div className="navItem">
             <div className="cart">
               <BsCart size={22} />
-              <span>{userCart?.numOfCart}</span>
+              <span>{userCart?.numOfCart || 0}</span>
             </div>
             Cart
           </div>

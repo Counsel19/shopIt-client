@@ -20,6 +20,7 @@ const AppContextProvider = ({ children }) => {
     products: null,
     allCategories: null,
     userCart: null,
+    userSaved: null,
     categoryFilter: "all",
     search: "",
     errorMsg: "",
@@ -89,11 +90,30 @@ const AppContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+  const getUserSaved = async () => {
+    try {
+      const { data } = await authFetch.get("/saved");
+      dispatch({
+        type: ACTIONS.USER_SAVED,
+        payload: { userSaved: data },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const addToCart = async (payload) => {
     try {
       await authFetch.post("/carts", payload);
       await getUserCart();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addToSaved = async (payload) => {
+    try {
+      await authFetch.post("/saved", payload);
+      await getUserSaved();
     } catch (error) {
       console.log(error);
     }
@@ -203,7 +223,9 @@ const AppContextProvider = ({ children }) => {
         handleInputChange,
         getAllCategories,
         getUserCart,
+        getUserSaved,
         addToCart,
+        addToSaved,
         updateUserCart,
         deleteUserCart,
         clearMessage,
