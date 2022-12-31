@@ -43,19 +43,6 @@ const cartItems = [
 const Cart = () => {
   const cartQty = cartItems.length;
   const { getUserCart, user, userCart } = useAppContext();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const getData = async () => {
-      if (user) {
-        await getUserCart();
-      } else {
-        navigate("/login", { replace: true });
-      }
-    };
-
-    getData();
-  }, []);
 
   return (
     <div className="flex">
